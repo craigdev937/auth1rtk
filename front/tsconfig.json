@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "Bundler",
+        "strict": true,
+        "jsx": "react-jsx",
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "module": "ESNext",
+        "target": "ES6",
+        "lib": ["DOM", "DOM.Iterable", "ES2023"],
+        "paths": {"@public/*": ["./public/*"]}
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["src"]
+}
+
+
+
