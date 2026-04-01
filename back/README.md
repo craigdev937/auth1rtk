@@ -1,6 +1,6 @@
-# JWT and PERN
+# Express and TypeScript
 
-A PERN app created with Bcryptjs, JSON Webtoken, TypeScript, Express, Zod, and PostgreSQL.
+The backend created with Bcryptjs, JSON Webtoken, TypeScript, Express, Zod, and PostgreSQL.
 
 
 

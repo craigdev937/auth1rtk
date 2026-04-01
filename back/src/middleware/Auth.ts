@@ -22,8 +22,10 @@ export const PRO: express.Handler = async (req: AU, res, next) => {
     }
 };
 
-export const generateToken = (id: number) => {
-    return jwt.sign({ id }, JWT, { expiresIn: "30d" })
+export const signToken = (id: number) => {
+    return jwt.sign(
+        { id }, JWT, { expiresIn: "30d" }
+    );
 };
 
 

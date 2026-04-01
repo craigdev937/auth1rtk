@@ -1,9 +1,9 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { dBase } from "../db/Data";
-import { generateToken } from "../middleware/Auth";
-import { RSchema, LSchema, LType } from "../validation/Schema";
-import { ILog, IReg, AU } from "../models/Interfaces";
+import { signToken } from "../middleware/Auth";
+import { RSchema, LSchema } from "../validation/Schema";
+import { IReg, AU } from "../models/Interfaces";
 
 class UserClass {
     Register: express.Handler = async (req, res, next) => {
@@ -22,7 +22,7 @@ class UserClass {
                 VALUES ($1, $2, $3) RETURNING *`;
             const values = [R.name, R.email, bPASS];
             const newUser = await dBase.query<IReg>(QRY, values);
-            const newToken = generateToken(newUser.rows[0].id);
+            const newToken = signToken(newUser.rows[0].id);
             res.cookie("token", newToken, {
                 httpOnly: true,
                 secure: false,
@@ -87,15 +87,17 @@ class UserClass {
                     .status(400)
                     .json({msg: "Invalid Credentials"})
             };
+
             const uData = user.rows[0];
-            const isMatch = await bcrypt.compare(L.password, uData.password);
+            const isMatch = await bcrypt.compare(
+                L.password, uData.password);
             if (!isMatch) {
                 return res
                     .status(400)
                     .json({msg: "Invalid Credentials"})
             };
             
-            const logToken = generateToken(uData.id);
+            const logToken = signToken(uData.id);
             res.cookie("token", logToken, {
                 httpOnly: true,
                 secure: false,
@@ -138,6 +140,32 @@ class UserClass {
                 .json({
                     success: false,
                     message: "Error finding User Info",
+                    error: error instanceof Error ? 
+                        error.message : "Unknown Error!"
+                });
+            next(error);
+        }
+    };
+
+    Logout: express.Handler = async (req, res, next) => {
+        try {
+            res.cookie("token", "", {
+                httpOnly: true,
+                secure: false,
+                sameSite: "strict",
+                maxAge: 1
+            });
+            res.status(201)
+            .json({
+                success: true,
+                message: "The User has Logged Out!"
+            });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error logging out",
                     error: error instanceof Error ? 
                         error.message : "Unknown Error!"
                 });

@@ -8,6 +8,7 @@ export const userRt: express.Router = express.Router();
     userRt.get("/users", USER.FetchAll);
     userRt.post("/users/login", USER.Login);
     userRt.get("/users/me", PRO, USER.Me);
+    userRt.post("/users/logout", USER.Logout);
 
     
 
