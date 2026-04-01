@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "module": "NodeNext",
+        "target": "ES2023",
+        "lib": ["ES2023"],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": ["node_modules", "dist"],
+    "include": ["src"]
+}
+
+
