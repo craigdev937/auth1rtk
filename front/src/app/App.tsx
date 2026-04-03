@@ -1,15 +1,11 @@
 import React from "react";
-import "./App.css";
-import Byron from "@public/Byron1.jpg";
+import "./App.css"
+import { NavRoutes } from "../routes/NavRoutes";
 
 export const App = () => {
     return (
         <React.Fragment>
-            <h1>Byron and James</h1>
-            <img 
-                src={Byron} alt="Byron and James" 
-                height={"600px"} width={"auto"}
-            />
+            <NavRoutes />
         </React.Fragment>
     );
 };

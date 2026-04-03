@@ -10,7 +10,7 @@
         "isolatedModules": true,
         "resolveJsonModule": true,
         "module": "ESNext",
-        "target": "ES6",
+        "target": "ES2022",
         "lib": ["DOM", "DOM.Iterable", "ES2023"],
         "paths": {"@public/*": ["./public/*"]}
     },

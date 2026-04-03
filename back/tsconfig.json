@@ -8,12 +8,14 @@
         "isolatedModules": true,
         "module": "NodeNext",
         "target": "ES2023",
-        "lib": ["ES2023"],
+        "lib": ["ESNext"],
+        "types": ["node"],
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "rewriteRelativeImportExtensions": true
     },
     "exclude": ["node_modules", "dist"],
-    "include": ["src"]
+    "include": ["src/**/*.ts"]
 }
 
 
