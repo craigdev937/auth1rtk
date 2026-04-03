@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { App } from "./app/App";
+import { RED } from "./global/RED";
 
 ReactDOM
-.createRoot(document.getElementById("root") as HTMLElement)
+.createRoot(document.getElementById("root")!)
 .render(
-    <React.Fragment>
-        <App />
-    </React.Fragment>
+    <Provider store={RED}>
+        <React.Fragment>
+            <App />
+        </React.Fragment>
+    </Provider>
 );
 
 

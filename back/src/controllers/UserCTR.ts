@@ -172,6 +172,99 @@ class UserClass {
             next(error);
         }
     };
+
+    GetOne: express.Handler = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const QRY = "SELECT * FROM users WHERE id = $1";
+            const user = await dBase.query<IReg>(QRY, [id]);
+            return res
+                .status(201)
+                .json({
+                    success: true,
+                    message: "This User is...",
+                    data: {
+                        id: user.rows[0].id,
+                        name: user.rows[0].name,
+                        email: user.rows[0].email,
+                        created_at: user.rows[0].created_at,
+                        updated_at: user.rows[0].updated_at
+                    }
+                });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error getting one User",
+                    error: error instanceof Error ? 
+                        error.message : "Unknown Error!"
+                });
+            next(error);
+        }
+    };
+
+    Update: express.Handler = async (req, res, next) => {
+        try {
+            const U = RSchema.parse(req.body);
+            const { id } = req.params;
+            const QRY = `UPDATE users 
+            SET name=$1, email=$2, password=$3,
+            updated_at=CURRENT_TIMESTAMP 
+            WHERE id=$4 RETURNING *`;
+            const values = [U.name, U.email, U.password, id];
+            const upUser = await dBase.query<IReg>(QRY, values);
+            return res
+                .status(201)
+                .json({
+                    success: true,
+                    message: "The User was Updated!",
+                    data: {
+                        id: upUser.rows[0].id,
+                        name: upUser.rows[0].name,
+                        email: upUser.rows[0].email,
+                        password: upUser.rows[0].password,
+                        created_at: upUser.rows[0].created_at,
+                        updated_at: upUser.rows[0].updated_at
+                    }
+                });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Updating the User",
+                    error: error instanceof Error ? 
+                        error.message : "Unknown Error!"
+                });
+            next(error);
+        }
+    };
+
+    Delete: express.Handler = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const QRY = "DELETE FROM users WHERE id=$1";
+            const delUser = await dBase.query<IReg>(QRY, [id]);
+            return res
+                .status(201)
+                .json({
+                    success: true,
+                    message: "The User was Deleted!",
+                    data: delUser.rows[0]
+                });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Deleting the User",
+                    error: error instanceof Error ? 
+                        error.message : "Unknown Error!"
+                });
+            next(error);
+        }
+    };
 };
 
 export const USER: UserClass = new UserClass();
