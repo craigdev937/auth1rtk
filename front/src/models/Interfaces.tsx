@@ -14,19 +14,24 @@ export interface IData {
 
 export interface IUser {
     id: number,
-    first: string,
-    last: string,
+    name: string,
     email: string,
     password: string,
     created_at?: string,
     updated_at?: string
 };
 
+export interface IAuth {
+    isAuth: boolean,
+    user: Omit<IUser, "password"> | null
+}
+
 export interface ILogin {
     email: string,
-    password: string,
-    token: string
+    password: string
 };
+
+
 
 
 

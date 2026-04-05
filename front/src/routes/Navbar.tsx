@@ -22,7 +22,8 @@ export const Navbar = () => {
                         className="nav__logo"
                         onClick={closeMenu}
                     >
-                        User
+                        <span className="navbar__logo">◈</span>
+                        <span className="navbar__title">HDQ</span>
                     </NavLink>
 
                     {/* NAV MENU BUTTON */}

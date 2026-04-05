@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { AuthReducer } from "./AuthSlice";
 
 export const RED = configureStore({
     reducer: {
-        users: () => "Users JWT and Encryption!"
+        auth: AuthReducer,
     }
 });
 
