@@ -1,9 +1,9 @@
 import express from "express";
 import bcrypt from "bcryptjs";
-import { dBase } from "../db/Data";
-import { signToken } from "../middleware/Auth";
-import { RSchema, LSchema } from "../validation/Schema";
-import { IReg, AU } from "../models/Interfaces";
+import { dBase } from "../db/Data.ts";
+import { signToken } from "../middleware/Auth.ts";
+import { RSchema, LSchema } from "../validation/Schema.ts";
+import type { IReg, AU } from "../models/Interfaces.ts";
 
 class UserClass {
     Register: express.Handler = async (req, res, next) => {

@@ -1,12 +1,15 @@
 import "dotenv/config";
 import express from "express";
 import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import favicon from "serve-favicon";
 import helmet from "helmet";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
-import { ERR } from "./middleware/midError";
-import { userRt } from "./routes/UserRT";
+import { ERR } from "./middleware/midError.ts";
+import { userRt } from "./routes/UserRT.ts";
 
 (async () => {
     const app: express.Application = express();

@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { dBase } from "../db/Data";
-import { AU, JwtPayload, IReg } from "../models/Interfaces";
+import { dBase } from "../db/Data.ts";
+import type { AU, JwtPayload, IReg } from "../models/Interfaces.ts";
 const JWT = process.env.JWT_SECRET ?? "";
 
 export const PRO: express.Handler = async (req: AU, res, next) => {
