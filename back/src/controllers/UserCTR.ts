@@ -104,16 +104,17 @@ class UserClass {
                 sameSite: "strict",
                 maxAge: 1000 * 60 * 60 * 24 * 30  // 30-Days.
             });
-
-            res.json({
-                success: true,
-                message: "User logged in",
-                data: {
-                    id: uData.id,
-                    name: uData.name,
-                    email: uData.email
-                }
-            });
+            return res
+                .status(201)
+                .json({
+                    success: true,
+                    message: "User logged in",
+                    data: {
+                        id: uData.id,
+                        name: uData.name,
+                        email: uData.email
+                    }
+                });
         } catch (error) {
             res
                 .status(res.statusCode)
